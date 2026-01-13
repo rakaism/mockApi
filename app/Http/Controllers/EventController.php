@@ -12,4 +12,18 @@ class EventController extends Controller
         
         return response()->json($events);
     }
+
+    public function getEventDetail($id) {
+        $event = Event::findOrFail($id);
+
+        if (!$event) {
+            return response()->json(
+                ['msg', 'Event tidak ditemukan.'], 404
+            );
+        }
+
+        return response()->json(
+            $event, 200
+        );
+    }
 }
